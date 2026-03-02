@@ -1,3 +1,4 @@
+-- Services
 local DataStoreService = game:GetService("DataStoreService")
 
 local Server = {}
@@ -20,8 +21,17 @@ local DATA_TEMPLATE: PlayerData = {
 	@param player: Player
 	@return: PlayerData
 ]]
-function Server.SetupData(player: Player): PlayerData
-	return PlayerStore:GetAsync(tostring(player.UserId)) or table.clone(DATA_TEMPLATE)
+function Server.SetupData(player: Player): PlayerData?
+	local key = tostring(player.UserId)
+	local success, result = pcall(function()
+		return PlayerStore:GetAsync(key)
+	end)
+
+	if success then
+		return result or table.clone(DATA_TEMPLATE)
+	else
+		return nil
+	end
 end
 
 --[[

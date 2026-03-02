@@ -4,6 +4,9 @@ local Players = game:GetService("Players")
 -- Modules
 local PlayerDataManager = require(script.PlayerDataManager)
 
+-- Init
+PlayerDataManager.Init()
+
 -- When player join
 local PlayerJoinCon: RBXScriptConnection = Players.PlayerAdded:Connect(function(player: Player)
 	PlayerDataManager.PlayerJoin(player)
