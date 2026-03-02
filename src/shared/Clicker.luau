@@ -3,6 +3,7 @@ module.__index = module
 
 local asset_id: string = "rbxassetid://18459009770"
 
+-- Manual Type
 export type Clicker = {
 	Button: ImageButton,
 	OnClickCon: RBXScriptConnection,
@@ -15,7 +16,9 @@ export type Clicker = {
 	Destroy: () -> (),
 }
 
+-- Constructor
 function module.New(screen: ScreenGui)
+	-- Create instance
 	local self = setmetatable(module, {})
 	local button: ImageButton = Instance.new("ImageButton")
 	button.Parent = screen
@@ -36,6 +39,7 @@ function module.New(screen: ScreenGui)
 	return self
 end
 
+-- Events
 function module.OnClick(self: Clicker, func: (...any) -> ())
 	self.OnClickCon = self.Button.MouseButton1Down:Connect(function()
 		func()
@@ -60,6 +64,7 @@ function module.EndHover(self: Clicker, func: (...any) -> ())
 	end)
 end
 
+-- Destroy
 function module.Destroy(self)
 	self.Button:Destroy()
 	self.OnClickCon:Disconnect()

@@ -14,7 +14,7 @@ screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 -- Remote Events
 local REMOTE_FOLDER = Utility.CreateFolder("RemoteEvents")
-local OnClick = Utility.CreateRemoteEvent("OnClick", REMOTE_FOLDER)
+local OnClick = REMOTE_FOLDER:FindFirstChild("OnClick")
 
 -- Cookie Button
 local CookieButton = Clicker.New(screenGui)
