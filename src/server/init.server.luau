@@ -18,8 +18,15 @@ local PlayerLeaveCon: RBXScriptConnection = Players.PlayerRemoving:Connect(funct
 end)
 
 -- When game closing
-game.Close:Once(function(...)
-	PlayerJoinCon:Disconnect()
-	PlayerLeaveCon:Disconnect()
+game:BindToClose(function()
+	-- On déconnecte pour éviter que la sauvegarde lorsque les joueurs quittent se lance en même temps (performance)
+	if PlayerJoinCon then
+		PlayerJoinCon:Disconnect()
+	end
+	if PlayerLeaveCon then
+		PlayerLeaveCon:Disconnect()
+	end
+
+	-- On lance la sauvegarde générale
 	PlayerDataManager.GameClosing()
 end)
